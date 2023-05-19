@@ -1,11 +1,14 @@
 import React from 'react';
 import Square from './Square';
 
-function Main(props){
-    // console.log(props.bArray[0].id);
-    const sqDisplay = props.bArray.map((box) => {
+function Main({ bArray, HandleClick }){
+    console.log(bArray);
+
+    const sqDisplay = bArray.map(box => {
+        let filled = (box.on) ? "square fill": "square";
+        let boxId = box.id;
         return (
-            <div key={box.id} className="square">
+            <div key={boxId} id={boxId} className={filled} onClick={HandleClick} >
                 <Square />
             </div>
         );

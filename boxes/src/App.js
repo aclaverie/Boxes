@@ -6,7 +6,25 @@ import { useState } from 'react';
 function App() {
 
   const [boxArray, setBoxArray] = useState(boxes);
-  
+  const [boxClicked, setBoxClicked] = useState(null);
+  const [stArray, setFutureArray] = useState(null);
+
+  function handleClick(e){
+    setBoxClicked(e.target.id);
+    setBoxArray(prevBoxes => {
+      for(let y=0;y<prevBoxes.length;y++)
+      {
+        if(prevBoxes[y].id === boxClicked){
+          prevBoxes[y].on = !prevBoxes[y].on;
+        }
+        setFutureArray([prevBoxes[y]]);
+      }
+      return ([stArray])
+    })
+    console.log(boxClicked);
+  }
+
+ 
 
   return (
     <div className="App">
@@ -24,7 +42,9 @@ function App() {
         React Project - 4
       </div>
       </header>
-      <Main bArray={boxArray} />
+      
+      <Main bArray={boxArray} HandleClick={handleClick} />
+
       <div className="App-footer">
         <div className="footer-info">
           Powered By React!
