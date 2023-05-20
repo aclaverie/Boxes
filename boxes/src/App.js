@@ -4,27 +4,16 @@ import boxes from './components/BoxesData';
 import { useState } from 'react';
 
 function App() {
-
   const [boxArray, setBoxArray] = useState(boxes);
-  const [boxClicked, setBoxClicked] = useState(null);
-  const [stArray, setFutureArray] = useState(null);
-
+  // const [changeArray, setChangeArray] = useState(boxes);
   function handleClick(e){
-    setBoxClicked(e.target.id);
+    let clickID = e.target.id-1;
     setBoxArray(prevBoxes => {
-      for(let y=0;y<prevBoxes.length;y++)
-      {
-        if(prevBoxes[y].id === boxClicked){
-          prevBoxes[y].on = !prevBoxes[y].on;
-        }
-        setFutureArray([prevBoxes[y]]);
-      }
-      return ([stArray])
+      prevBoxes[clickID].on = !prevBoxes[clickID].on;
+      return [...prevBoxes];
     })
-    console.log(boxClicked);
+   
   }
-
- 
 
   return (
     <div className="App">
@@ -42,7 +31,7 @@ function App() {
         React Project - 4
       </div>
       </header>
-      
+      {/* {console.log(boxArray)} */}
       <Main bArray={boxArray} HandleClick={handleClick} />
 
       <div className="App-footer">

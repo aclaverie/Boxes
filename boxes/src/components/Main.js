@@ -2,11 +2,16 @@ import React from 'react';
 import Square from './Square';
 
 function Main({ bArray, HandleClick }){
-    console.log(bArray);
+    // console.log(bArray);
 
-    const sqDisplay = bArray.map(box => {
-        let filled = (box.on) ? "square fill": "square";
-        let boxId = box.id;
+    const sqDisplay = bArray.map(bArr => {
+        
+        let filled = null;
+        let boxId = null;
+        // console.log(bArr);
+        filled = (bArr.on) ? "square fill": "square";
+        // console.log("Now it is: "+filled);
+        boxId = bArr.id;
         return (
             <div key={boxId} id={boxId} className={filled} onClick={HandleClick} >
                 <Square />
