@@ -7,23 +7,33 @@ function App() {
   const [boxArray, setBoxArray] = useState(boxes);
 
   function toggle(id){
-    
-    
-    setBoxArray((prevArray)=>{
-      const newSquares = [];
-      for(let i=0;i<prevArray.length; i++){
-        const currentSq = prevArray[i];
-        if(currentSq.id===id){
-          const updateSq = {
-            ...currentSq,
-            on: !currentSq.on
-          }
-          newSquares.push(updateSq)
-        }else {
-          newSquares.push(currentSq)
-        }
-      }
-      return ( [...newSquares] );
+    //Two methods one declaritive and the other imperative
+    //the code commented out is very imperative.
+    //However React really adheres to writing Declaritive code
+    //
+    // setBoxArray((prevArray)=>{
+      //Imperative Code
+      // const newSquares = [];
+      // for(let i=0;i<prevArray.length; i++){
+      //   const currentSq = prevArray[i];
+      //   if(currentSq.id===id){
+      //     const updateSq = {
+      //       ...currentSq,
+      //       on: !currentSq.on
+      //     }
+      //     newSquares.push(updateSq)
+      //   }else {
+      //     newSquares.push(currentSq)
+      //   }
+      // }
+      // return ( [...newSquares] );
+    // })
+
+    // React more declaritive
+    setBoxArray(prevArray => {
+      return prevArray.map((square)=>{
+        return square.id===id ? {...prevArray, on: !square.on} : square;
+      })
     })
   }
 
