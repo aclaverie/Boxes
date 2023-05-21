@@ -1,20 +1,38 @@
 import './App.css';
-import Main from './components/Main';
 import boxes from './components/BoxesData';
+import Square from './components/Square';
 import { useState } from 'react';
 
 function App() {
   const [boxArray, setBoxArray] = useState(boxes);
-  // const [changeArray, setChangeArray] = useState(boxes);
-  function handleClick(e){
-    let clickID = e.target.id-1;
-    setBoxArray(prevBoxes => {
-      prevBoxes[clickID].on = !prevBoxes[clickID].on;
-      return [...prevBoxes];
+
+  function toggle(id){
+    
+    
+    setBoxArray((prevArray)=>{
+      const newSquares = [];
+      for(let i=0;i<prevArray.length; i++){
+        const currentSq = prevArray[i];
+        if(currentSq.id===id){
+          const updateSq = {
+            ...currentSq,
+            on: !currentSq.on
+          }
+          newSquares.push(updateSq)
+        }else {
+          newSquares.push(currentSq)
+        }
+      }
+      return ( [...newSquares] );
     })
-   
   }
 
+  const squareElements = boxArray.map((box)=>{
+    return(
+      <Square key={box.id} id={box.id} on={box.on} handleClick={toggle} />
+    )
+  })
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -31,9 +49,9 @@ function App() {
         React Project - 4
       </div>
       </header>
-      {/* {console.log(boxArray)} */}
-      <Main bArray={boxArray} HandleClick={handleClick} />
-
+      <main className='container' >
+        {squareElements}
+      </main>
       <div className="App-footer">
         <div className="footer-info">
           Powered By React!
