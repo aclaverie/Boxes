@@ -39,9 +39,13 @@ function App() {
 
   const squareElements = boxArray.map((box)=>{
     return(
-      <Square key={box.id} id={box.id} on={box.on} handleClick={toggle} />
-    )
-  })
+      <Square 
+      key={box.id}
+      on={box.on} 
+      handleClick={()=>toggle(box.id)}
+        />
+  )})
+  
   
   return (
     <div className="App">
